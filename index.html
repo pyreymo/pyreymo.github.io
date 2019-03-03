@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,16 +53,12 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/infinity.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/infinity.ico?v=5.1.4">
 
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -93,7 +89,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -121,7 +117,7 @@
 
 
 
-  <title>Pyreymo的小茶馆</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Pyreymo的小茶馆 - 体会世界内禀</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -157,7 +153,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">体会世界内禀</p>
+        <h1 class="site-subtitle" itemprop="description">体会世界内禀</h1>
       
   </div>
 
@@ -266,9 +262,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/03/OpenGL学习-1/" itemprop="url">OpenGL学习(1)</a></h1>
+                <a class="post-title-link" href="/2019/03/03/OpenGL学习-1/" itemprop="url">OpenGL学习(1)</a></h2>
         
 
         <div class="post-meta">
@@ -319,52 +315,19 @@
 
       
         
-          
-            <h1 id="OpenGL第一次实验"><a href="#OpenGL第一次实验" class="headerlink" title="OpenGL第一次实验"></a>OpenGL第一次实验</h1><blockquote>
+          <h1 id="OpenGL第一次实验"><a href="#OpenGL第一次实验" class="headerlink" title="OpenGL第一次实验"></a>OpenGL第一次实验</h1><hr>
+<blockquote>
 <p>2019.3.3</p>
 </blockquote>
 <p>作业：利用OpenGL实现2维小球触地不断弹起的效果</p>
-<hr>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.<strong>搜集资料</strong></p>
-<ul>
-<li>OpenGL是图形硬件的一种软件接口，是一个具有较大可移植性的函数库，可以基于C语言运行。利用OpenGL可以高效率地进行3D图形的绘制。</li>
-<li>看看《OpenGL编程指南》和《基于OpenGL的自顶向下方法》两本书前面的内容，了解一些基本的原理和具体程序的框架。</li>
-</ul>
-<p>2.<strong>环境安装</strong></p>
-<ul>
-<li>按照<a href="https://blog.csdn.net/linian71/article/details/68485494" target="_blank" rel="noopener">教程</a>来安装freeGLUT和glew库。</li>
-</ul>
-<hr>
-<h2 id="分析以及编写程序"><a href="#分析以及编写程序" class="headerlink" title="分析以及编写程序"></a>分析以及编写程序</h2><h3 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h3><p> 基本框架大致包括<code>main</code>、<code>display</code>、<code>init</code>三个部分。<br> OpenGL有一些事件回调函数需要注册特定的函数，比如显示回调函数应该把display作为参数输入，然后每当GLUT确定一个窗口的内容需要重新绘制时，回调函数就会运行，所以所有重绘场景的操作都应该放在display中。调用<code>glutPostRedisplay()</code> 会指示<code>glutMainLoop()</code>调用display进行重新绘制。<code>glutMainLoop()</code>用来启动程序，进入循环后不会停止。<br> <a href="https://github.com/pyreymo/OpenGL/blob/master/exp1_Introduction%20to%20OpenGL.doc" target="_blank" rel="noopener">演示代码</a>中的<code>glutReshapeFunc()</code>，<code>glutKeyboardFunc()</code>分别对应当<strong>窗口形状改变时</strong>和<strong>接收到键盘输入时</strong>的事件回调函数。库里还定义了许多其他的事件回调函数，但是有些没法直观看出作用。</p>
-   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutKeyboardFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">unsigned</span> <span class="keyword">char</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutSpecialFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutReshapeFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutVisibilityFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutDisplayFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">void</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutMouseFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutMotionFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutPassiveMotionFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutEntryFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutKeyboardUpFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">unsigned</span> <span class="keyword">char</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutSpecialUpFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutJoystickFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ), <span class="keyword">int</span> pollInterval )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutMenuStateFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutMenuStatusFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutOverlayDisplayFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">void</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutWindowStatusFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutSpaceballMotionFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutSpaceballRotateFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutSpaceballButtonFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutButtonBoxFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutDialsFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutTabletMotionFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutTabletButtonFunc</span><span class="params">( <span class="keyword">void</span> (* callback)( <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span>, <span class="keyword">int</span> ) )</span></span>;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="绘制静态图像"><a href="#绘制静态图像" class="headerlink" title="绘制静态图像"></a>绘制静态图像</h3><p>OpenGL库主要是用来绘制3D图形的，所以绘制三维物体的函数比较多，这次只需要简单地画个圆，按理说会很简单。但是看了书、查了库之后却发现没有绘制圆的函数，只能画简单的点线和多边形：<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GL_POINTS ，GL_LINES ，GL_LINE_STRIP ，GL_LINE_LOOP ，GL_TRIANGLES ，GL_TRIANGLE_STRIP ，GL_TRIANGLE_FAN ，GL_QUADS ，GL_QUAD_STRIP，GL_POLYGON</span><br></pre></td></tr></table></figure></p>
-<p>无计可施的我决定近似。<br>一种方法是把圆分解成许多个扇形，再把扇形近似成三角形，类似于微分的方法。但是这种方法绘制一个圆会把同一个函数调用过多次，性能会比较低。<br>另一种方法是用正n边形去近似圆，这样只需要计算一次n个顶点的位置，降低了计算量。<br><img src="/2019/03/03/OpenGL学习-1/1.png" alt="图为多边形顶点为50个的情况，可以看到已经近似得很好。"><br>第三种方法就是直接画一个球，如果不加任何纹理和光照，在摄像机中就应该是一个圆。但是我对3D对象还没什么了解，就暂且放弃了这种做法。</p>
-<hr>
-<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>最初我以为会有类似cocos2d里面的物理引擎，可以直接设置一个对象（精灵）的速度属性，但是显然第一步绘制出来的图形已经离散化而不是一个整体的元素了，也就不能对其整体设置一个属性。后来看红宝书发现，动画的实现居然就是逐帧绘制静态图像……<br>书里介绍，OpenGL是采用双缓冲的做法，在一个缓冲区渲染，另一个缓冲区显示，因此只要重复绘制+交换缓冲区这个操作越快，人眼就越不会感觉掉帧。<br>那么如何让这个动作重复执行下去又成了问题。依照我之前写一些游戏小插件的经验，各种环境里应该都是有内置的时间回调函数的，但是我搜不到相关的函数。后来经过老师提醒，GLUT是内置了一个延时器的，就是：<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutTimerFunc</span><span class="params">( <span class="keyword">unsigned</span> <span class="keyword">int</span> time, <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ), <span class="keyword">int</span> value )</span></span>;</span><br></pre></td></tr></table></figure></p>
-<p>递归调用这个函数就可以实现计时器的效果。至此动画部分的理论问题就扫清了。</p>
-<hr>
-<h3 id="运动轨迹"><a href="#运动轨迹" class="headerlink" title="运动轨迹"></a>运动轨迹</h3><p>小球抛出触底反弹最后停止的过程可以描述如下：</p>
-<script type="math/tex; mode=display">\left\{ \begin{array}{l}{\rm{x = } }t - \left\lfloor t \right\rfloor \\y = \lambda x(1 - x)\end{array} \right.</script><p>其中 $t$ 是每周期帧数，$\lambda$是未定系数。<br>显然$\lambda$与碰撞的次数有关，代表着每次碰撞后能量的衰减，但我并不想每次靠解碰撞能量损失方程的方法去计算 ，而是想通过简单的函数对$\lambda$近似。<br>所以观察 $\lambda$ 的性质：</p>
-<ul>
-<li>在第一次时要使$y{|_{x = \frac{1}{2} } } = 1$，即第一次要弹到屏幕顶端；</li>
-<li>随次数增加而减小；</li>
-<li>次数越多，减小的速率越慢；</li>
-<li>快速收敛向 $0$.</li>
-</ul>
-<p>综上我最终选取</p>
-<script type="math/tex; mode=display">\lambda = \frac{4}{ {\sqrt {time{s^3} } } }</script><p>作为近似的函数，并让次数每次碰撞后加 $1$。通过测试，这个函数收敛的速度比较接近实际情况的能量衰减。</p>
-<hr>
-<h3 id="刷新帧率"><a href="#刷新帧率" class="headerlink" title="刷新帧率"></a>刷新帧率</h3><p>帧率(FPS)也是很重要的概念，这决定GLUT每秒应该绘制多少帧。如果我想让第一个碰撞周期持续$t_1$秒，每次$t_1$递增 $1$，在一个周期里恰好达到$t_{max}$的值，那么就有</p>
-<script type="math/tex; mode=display">{t_{\max } } = fps \cdot {t_1}</script><p>那么重要的问题就是每个运动周期的确定。运动周期的长度显然与运动的次数有关，运动次数越多，运动周期越短，但是这种衰减也不能出现肉眼可见的违背物理现象的“越振越快”，于是还是可以采取近似的方式，大致取</p>
-<script type="math/tex; mode=display">{t_n} = times^{ - 0.2} \cdot {t_{n - 1} }</script><p>再综合$\lambda$的取值对这个方程进行简单的修正：</p>
-   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Ypos = <span class="number">4</span> * (frame_now / frame_total)*(<span class="number">1</span> - frame_now / frame_total) / <span class="built_in">pow</span>(times, <span class="number">1.5</span>);	<span class="comment">//运动控制方程</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">fabs</span>(frame_now - frame_total) &lt; <span class="number">1e-4</span>) &#123;</span><br><span class="line">    frame_now = <span class="number">0</span>;</span><br><span class="line">    times &gt; <span class="number">5</span> ? times += <span class="number">4</span> : times++;	<span class="comment">//修正</span></span><br><span class="line">    <span class="keyword">if</span> (mspf &gt; <span class="number">2</span>)mspf = mspf / <span class="built_in">pow</span>(times, <span class="number">0.2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123; frame_now++; &#125;</span><br></pre></td></tr></table></figure>
-<p>   就获得了比较好的效果。</p>
-<hr>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这次大体熟悉了C语言中如何导入库文件，如何配置一个基本的工作环境，了解了OpenGL程序的框架和简单动画的实现方法，同时也对模拟物体运动的方法有了初步的认识。</p>
-<p>最后附上这次作业的工程文件和实现效果：<br><img src="/2019/03/03/OpenGL学习-1/2.gif" alt="实现效果"><br><a href="https://github.com/pyreymo/OpenGL/tree/master/exp1" target="_blank" rel="noopener">工程文件</a></p>
-
-          
+<h2 id><a href="#" class="headerlink" title></a></h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/03/OpenGL学习-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -428,9 +391,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/02/欢迎/" itemprop="url">欢迎</a></h1>
+                <a class="post-title-link" href="/2019/03/02/欢迎/" itemprop="url">欢迎</a></h2>
         
 
         <div class="post-meta">
@@ -481,8 +444,7 @@
 
       
         
-          
-            <h1 id="欢迎来到Pyreymo的小茶馆"><a href="#欢迎来到Pyreymo的小茶馆" class="headerlink" title="欢迎来到Pyreymo的小茶馆"></a>欢迎来到Pyreymo的小茶馆</h1><hr>
+          <h1 id="欢迎来到Pyreymo的小茶馆"><a href="#欢迎来到Pyreymo的小茶馆" class="headerlink" title="欢迎来到Pyreymo的小茶馆"></a>欢迎来到Pyreymo的小茶馆</h1><hr>
 <blockquote>
 <p>2019/03/02 初版</p>
 </blockquote>
@@ -490,11 +452,14 @@
 <ul>
 <li>日记</li>
 <li>代码</li>
-<li>数学</li>
-</ul>
-<p>评论区已经开放（<del>但评论加载速度并不稳定</del><br>总之就先这样了，欢迎随时观看。</p>
-
-          
+<li>数学<br>评论区已经开放（<del>但评论加载速度并不稳定</del><br>总之就先这样了，欢迎随时观看。</li></ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/02/欢迎/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -588,6 +553,22 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pyreymo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:pyreymo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
           
 
           
@@ -791,6 +772,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
