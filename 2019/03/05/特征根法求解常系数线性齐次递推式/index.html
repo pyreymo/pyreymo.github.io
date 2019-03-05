@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="Pyreymo的小茶馆">
 <meta property="og:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T08:56:46.519Z">
+<meta property="og:updated_time" content="2019-03-05T09:09:53.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="特征根法求解常系数线性齐次递推式">
 <meta name="twitter:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题">
@@ -321,20 +321,27 @@
 <blockquote>
 <p>2019.3.5</p>
 </blockquote>
-<pre><code>利用特征根法解决常系数线性递推式求数列通项的问题
-</code></pre><a id="more"></a>
-<h2 id="1-齐次线性递推数列"><a href="#1-齐次线性递推数列" class="headerlink" title="1.齐次线性递推数列"></a>1.齐次线性递推数列</h2><p>我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：<script type="math/tex">a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1</script></p>
-<p>如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。</p>
-<p>要求这个数列的通解可以先观察其形式，我们发现，$\{a_n\}$的性质类似等比数列。因此我们假设$\{a_n\}=q^n,(q\neq0)$,带入$(1)$可得：<script type="math/tex">q^n=b_1q^{n-1}+b_2q^{n-2}+\cdots+b_kq^{n-k}</script>两边同时除以$q^{n-k}$得到：</p>
-<script type="math/tex; mode=display">q^k=b_1q^{k-1}+b_2q^{k-2}+\cdots+b_k\tag2$$这个方程在$\Bbb{C}$上有$k$个根$q_1,q_2,\cdots,q_k$，而由这$k$个根构造出的数列$q_1^n,q_2^n,\cdots,q_k^n$也就是满足$(1)$的$k$个解。
-
-那么**先假设其中没有重根**，这$k$个根构成$(1)$解空间的一个基，其通解就是：$$a_n=C_1q_1^n+C_2q_2^n+\cdots+C_kq_k^n$$ <p align="right">（其中$C_i$是常数）</p>由初始条件，可得方程组：$$\left\{ 
-\begin{array}{l}
-    &C_1q_1^0+C_2q_2^0+\cdots+C_kq_k^0 = a_0\\
-    &C_1q_1^1+C_2q_2^1+\cdots+C_kq_k^1 = a_1\\
+<p>利用特征根法解决常系数线性递推式求数列通项的问题<br><a id="more"></a></p>
+<h2 id="1-齐次线性递推数列"><a href="#1-齐次线性递推数列" class="headerlink" title="1.齐次线性递推数列"></a>1.齐次线性递推数列</h2><p>我们称$\{a_n\}$是一个齐次线性递推数列，当数列$\{a_n\}$形如：</p>
+<script type="math/tex; mode=display">a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1</script><p>如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。</p>
+<p>要求这个数列的通解可以先观察其形式，我们发现，$\{a_n\}$的性质类似等比数列。因此我们假设$\{a_n\}=q^n,(q\neq0)$,带入$(1)$可得：</p>
+<script type="math/tex; mode=display">q^n=b_1q^{n-1}+b_2q^{n-2}+\cdots+b_kq^{n-k}</script><p>两边同时除以$q^{n-k}$得到：</p>
+<script type="math/tex; mode=display">q^k=b_1q^{k-1}+b_2q^{k-2}+\cdots+b_k\tag2</script><p>这个方程在$\Bbb{C}$上有$k$个根$q_1,q_2,\cdots,q_k$，而由这$k$个根构造出的数列$q_1^n,q_2^n,\cdots,q_k^n$也就是满足$(1)$的$k$个解。</p>
+<p>那么<strong>先假设其中没有重根</strong>，这$k$个根构成$(1)$解空间的一个基，其通解就是：</p>
+<script type="math/tex; mode=display">a_n=C_1q_1^n+C_2q_2^n+\cdots+C_kq_k^n</script><script type="math/tex; mode=display">（其中，C_i 是常数）</script><p>由初始条件，可得方程组：</p>
+<script type="math/tex; mode=display">\left\{ \begin{array}{cc}
+    &C_1q_1^0+C_2q_2^0+\cdots+C_kq_k^0 &= a_0\\
+    &C_1q_1^1+C_2q_2^1+\cdots+C_kq_k^1 &= a_1\\
     &\cdots \\
-    &C_1q_1^{k-1}+C_2q_2^{k-1}+\cdots+C_kq_k^{k-1} = a_0
-\end{array} \right.\tag3$$其系数矩阵为</script><p>\begin{pmatrix}<br>    1 &amp; 1 &amp; \cdots &amp; 1\\<br>    q_1&amp;q_2&amp;\cdots&amp;q_k\\<br>    \vdots&amp;\vdots&amp;\ddots&amp;\vdots\\<br>    q_1^{k-1}&amp;q_2^{k-1}&amp;\cdots&amp;q_k^{k-1}<br>\end{pmatrix}$$是范德蒙德矩阵，由于$q_i$中没有重根，因此范德蒙德行列式的值为0，进而$(3)$有唯一解。</p>
+    &C_1q_1^{k-1}+C_2q_2^{k-1}+\cdots+C_kq_k^{k-1} &= a_0
+\end{array} \right.\tag3</script><p>其系数矩阵为</p>
+<script type="math/tex; mode=display">
+\begin{pmatrix}
+    1 & 1 & \cdots & 1\\
+    q_1&q_2&\cdots&q_k\\
+    \vdots&\vdots&\ddots&\vdots\\
+    q_1^{k-1}&q_2^{k-1}&\cdots&q_k^{k-1}
+\end{pmatrix}</script><p>是范德蒙德矩阵，由于$q_i$中没有重根，因此范德蒙德行列式的值为0，进而$(3)$有唯一解。</p>
 <h2 id="没写完"><a href="#没写完" class="headerlink" title="没写完"></a><p align="right">没写完</p></h2>
       
     </div>
