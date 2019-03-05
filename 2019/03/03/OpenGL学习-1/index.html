@@ -64,7 +64,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="OpenGL,">
 
 
 
@@ -76,6 +76,7 @@
 
 
 <meta name="description" content="OpenGL第一次实验  2019.3.3  作业：利用OpenGL实现2维小球触地不断弹起的效果">
+<meta name="keywords" content="OpenGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL学习(1)">
 <meta property="og:url" content="https://pyreymo.github.io/2019/03/03/OpenGL学习-1/index.html">
@@ -84,7 +85,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pyreymo.github.io/2019/03/03/OpenGL学习-1/1.png">
 <meta property="og:image" content="https://pyreymo.github.io/2019/03/03/OpenGL学习-1/2.gif">
-<meta property="og:updated_time" content="2019-03-03T14:16:16.453Z">
+<meta property="og:updated_time" content="2019-03-05T05:19:17.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL学习(1)">
 <meta name="twitter:description" content="OpenGL第一次实验  2019.3.3  作业：利用OpenGL实现2维小球触地不断弹起的效果">
@@ -340,7 +341,7 @@
 <h3 id="绘制静态图像"><a href="#绘制静态图像" class="headerlink" title="绘制静态图像"></a>绘制静态图像</h3><p>OpenGL库主要是用来绘制3D图形的，所以绘制三维物体的函数比较多，这次只需要简单地画个圆，按理说会很简单。但是看了书、查了库之后却发现没有绘制圆的函数，只能画简单的点线和多边形：<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GL_POINTS ，GL_LINES ，GL_LINE_STRIP ，GL_LINE_LOOP ，GL_TRIANGLES ，GL_TRIANGLE_STRIP ，GL_TRIANGLE_FAN ，GL_QUADS ，GL_QUAD_STRIP，GL_POLYGON</span><br></pre></td></tr></table></figure></p>
 <p>无计可施的我决定近似。<br>一种方法是把圆分解成许多个扇形，再把扇形近似成三角形，类似于微分的方法。但是这种方法绘制一个圆会把同一个函数调用过多次，性能会比较低。<br>另一种方法是用正n边形去近似圆，这样只需要计算一次n个顶点的位置，降低了计算量。<br><img src="/2019/03/03/OpenGL学习-1/1.png" alt="图为多边形顶点为50个的情况，可以看到已经近似得很好。"><br>第三种方法就是直接画一个球，如果不加任何纹理和光照，在摄像机中就应该是一个圆。但是我对3D对象还没什么了解，就暂且放弃了这种做法。</p>
 <hr>
-<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>最初我以为会有类似cocos2d里面的物理引擎，可以直接设置一个对象（精灵）的速度属性，但是显然第一步绘制出来的图形已经离散化而不是一个整体的元素了，也就不能对其整体设置一个属性。后来看红宝书发现，动画的实现居然就是逐帧绘制静态图像……<br>书里介绍，OpenGL是采用双缓冲的做法，在一个缓冲区渲染，另一个缓冲区显示，因此只要重复绘制+交换缓冲区这个操作越快，人眼就越不会感觉掉帧。<br>那么如何让这个动作重复执行下去又成了问题。依照我之前写一些游戏小插件的经验，各种环境里应该都是有内置的时间回调函数的，但是我搜不到相关的函数。后来经过老师提醒，GLUT是内置了一个延时器的，就是：<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutTimerFunc</span><span class="params">( <span class="keyword">unsigned</span> <span class="keyword">int</span> time, <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ), <span class="keyword">int</span> value )</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p>最初我以为会有类似cocos2d里面的物理引擎，可以直接设置一个对象（精灵）的速度属性，但是显然第一步绘制出来的图形已经离散化而不是一个整体的元素了，也就不能对其整体设置一个属性。后来看红宝书发现，动画的实现居然就是逐帧绘制静态图像……<br>书里介绍，OpenGL是采用双缓冲的做法，在一个缓冲区渲染，另一个缓冲区显示，因此只要重复绘制+交换缓冲区这个操作越快，人眼就越不会感觉掉帧。<br>重绘的操作可以通过调用<code>glutPostRedisplay()</code>这个方法实现。<br>那么如何让这个动作重复执行下去又成了问题。依照我之前写一些游戏小插件的经验，各种环境里应该都是有内置的时间回调函数的，但是我搜不到相关的函数。后来经过老师提醒，GLUT是内置了一个延时器的，就是：<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FGAPI <span class="keyword">void</span> FGAPIENTRY <span class="title">glutTimerFunc</span><span class="params">( <span class="keyword">unsigned</span> <span class="keyword">int</span> time, <span class="keyword">void</span> (* callback)( <span class="keyword">int</span> ), <span class="keyword">int</span> value )</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>递归调用这个函数就可以实现计时器的效果。至此动画部分的理论问题就扫清了。</p>
 <hr>
 <h3 id="运动轨迹"><a href="#运动轨迹" class="headerlink" title="运动轨迹"></a>运动轨迹</h3><p>小球抛出触底反弹最后停止的过程可以描述如下：</p>
@@ -377,6 +378,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
 
       
       
@@ -395,6 +402,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/特征根法求解常系数线性齐次递推式/" rel="prev" title="特征根法求解常系数线性齐次递推式">
+                特征根法求解常系数线性齐次递推式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -476,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -484,6 +495,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
