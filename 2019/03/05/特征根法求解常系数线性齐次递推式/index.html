@@ -75,18 +75,18 @@
 
 
 
-<meta name="description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题 1.齐次线性递推数列我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1 如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。 要求">
+<meta name="description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题">
 <meta name="keywords" content="数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特征根法求解常系数线性齐次递推式">
 <meta property="og:url" content="https://pyreymo.github.io/2019/03/05/特征根法求解常系数线性齐次递推式/index.html">
 <meta property="og:site_name" content="Pyreymo的小茶馆">
-<meta property="og:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题 1.齐次线性递推数列我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1 如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。 要求">
+<meta property="og:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T08:54:31.808Z">
+<meta property="og:updated_time" content="2019-03-05T08:56:46.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="特征根法求解常系数线性齐次递推式">
-<meta name="twitter:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题 1.齐次线性递推数列我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1 如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。 要求">
+<meta name="twitter:description" content="特征根法求解常系数线性递推式  2019.3.5  利用特征根法解决常系数线性递推式求数列通项的问题">
 
 
 
@@ -322,7 +322,8 @@
 <p>2019.3.5</p>
 </blockquote>
 <pre><code>利用特征根法解决常系数线性递推式求数列通项的问题
-</code></pre><h2 id="1-齐次线性递推数列"><a href="#1-齐次线性递推数列" class="headerlink" title="1.齐次线性递推数列"></a>1.齐次线性递推数列</h2><p>我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：<script type="math/tex">a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1</script></p>
+</code></pre><a id="more"></a>
+<h2 id="1-齐次线性递推数列"><a href="#1-齐次线性递推数列" class="headerlink" title="1.齐次线性递推数列"></a>1.齐次线性递推数列</h2><p>我们称$\{a_n$\}是一个齐次线性递推数列，当数列$\{a_n\}$形如：<script type="math/tex">a_n=b_1a_{n-1}+b_2a_{n-2}+\cdots+b_ka_{n-k}\tag1</script></p>
 <p>如果不给定$\{a_n\}$的前$k$项，则会存在许多满足条件的数列，我们称其为此递推式的通解。</p>
 <p>要求这个数列的通解可以先观察其形式，我们发现，$\{a_n\}$的性质类似等比数列。因此我们假设$\{a_n\}=q^n,(q\neq0)$,带入$(1)$可得：<script type="math/tex">q^n=b_1q^{n-1}+b_2q^{n-2}+\cdots+b_kq^{n-k}</script>两边同时除以$q^{n-k}$得到：</p>
 <script type="math/tex; mode=display">q^k=b_1q^{k-1}+b_2q^{k-2}+\cdots+b_k\tag2$$这个方程在$\Bbb{C}$上有$k$个根$q_1,q_2,\cdots,q_k$，而由这$k$个根构造出的数列$q_1^n,q_2^n,\cdots,q_k^n$也就是满足$(1)$的$k$个解。
