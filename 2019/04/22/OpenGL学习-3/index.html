@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/infinity.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/infinity.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="OpenGL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OpenGL第四次实验  2019.4.22  作业：实现橡皮条功能">
+<meta name="keywords" content="OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenGL学习(3)">
+<meta property="og:url" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/index.html">
+<meta property="og:site_name" content="Pyreymo的小茶馆">
+<meta property="og:description" content="OpenGL第四次实验  2019.4.22  作业：实现橡皮条功能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/1.png">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/2.gif">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/3.gif">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/4.gif">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/5.gif">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/6.png">
+<meta property="og:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/7.gif">
+<meta property="og:updated_time" content="2019-05-26T04:53:24.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenGL学习(3)">
+<meta name="twitter:description" content="OpenGL第四次实验  2019.4.22  作业：实现橡皮条功能">
+<meta name="twitter:image" content="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/">
+
+
+
+
+
+  <title>OpenGL学习(3) | Pyreymo的小茶馆</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pyreymo的小茶馆</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">体会世界内禀</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=4010201&auto=1&height=66"></iframe>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pyreymo.github.io/2019/04/22/OpenGL学习-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pyreymo">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pyreymo的小茶馆">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">OpenGL学习(3)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T12:44:51+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OpenGL第四次实验"><a href="#OpenGL第四次实验" class="headerlink" title="OpenGL第四次实验"></a>OpenGL第四次实验</h1><hr>
+<blockquote>
+<p>2019.4.22</p>
+</blockquote>
+<p>作业：实现橡皮条功能</p>
+<h2 id><a href="#" class="headerlink" title></a><a id="more"></a></h2><h2 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h2><h3 id="任务目标："><a href="#任务目标：" class="headerlink" title="任务目标："></a>任务目标：</h3><ol>
+<li>添加菜单，使得可以改变线的颜色、线型、线宽等属性。<strong>（已完成）</strong></li>
+<li>允许画多条直线，前面画过的直线不会消失。<strong>（已完成）</strong></li>
+</ol>
+<h4 id="1-添加了绘制文字功能"><a href="#1-添加了绘制文字功能" class="headerlink" title="1. 添加了绘制文字功能"></a>1. 添加了绘制文字功能</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在窗口上显示字符</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glPrint</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len, i;</span><br><span class="line">    <span class="keyword">wchar_t</span>* wstring;</span><br><span class="line">    HDC hDC = wglGetCurrentDC();</span><br><span class="line">    GLuint <span class="built_in">list</span> = glGenLists(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算字符的个数</span></span><br><span class="line">    len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; str[i] != <span class="string">'\0'</span>; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span> (IsDBCSLeadByte(str[i])) ++i;</span><br><span class="line">        ++len;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将混合字符转化为宽字符</span></span><br><span class="line">    wstring = (<span class="keyword">wchar_t</span>*)<span class="built_in">malloc</span>((len + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="keyword">wchar_t</span>));</span><br><span class="line">    <span class="keyword">if</span> (wstring != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, str, <span class="number">-1</span>, wstring, len);</span><br><span class="line">        wstring[len] = L'\<span class="number">0'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; ++i)&#123;</span><br><span class="line">            wglUseFontBitmapsW(hDC, wstring[i], <span class="number">1</span>, <span class="built_in">list</span>);</span><br><span class="line">            glCallList(<span class="built_in">list</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//垃圾回收</span></span><br><span class="line">        <span class="built_in">free</span>(wstring);</span><br><span class="line">        glDeleteLists(<span class="built_in">list</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置显示字符的属性</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glSetFont</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> charset, <span class="keyword">const</span> <span class="keyword">char</span>* face)</span> </span>&#123;</span><br><span class="line">    HFONT hFont = CreateFontA(size, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, FW_MEDIUM, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">        charset, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,</span><br><span class="line">        DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, face);</span><br><span class="line">    HFONT hOldFont = (HFONT)SelectObject(wglGetCurrentDC(), hFont);</span><br><span class="line">    DeleteObject(hOldFont);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上调用Windows API和glut库写了两个函数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绘制字符串str</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glPrint</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span></span>;</span><br><span class="line"><span class="comment">//参数列表：字号，指定字符集（主要使用ANSI_CHARSET），字体</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">glSetFont</span><span class="params">(<span class="keyword">int</span> size, <span class="keyword">int</span> charset, <span class="keyword">const</span> <span class="keyword">char</span>* face)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>分别用来画出文字和设置字符显示的属性。<br><br><br>添加这个功能主要是为了直观地进行操作提示，效果如图：<br><img src="/2019/04/22/OpenGL学习-3/1.png" alt="文字提示"><br>对应代码（放在display回调中）：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">glRasterPos2d(<span class="number">-0.3</span>, <span class="number">0.3</span>);                           <span class="comment">//设置位置偏移量</span></span><br><span class="line">glSetFont(<span class="number">45</span>, ANSI_CHARSET, <span class="string">"Microsoft YaHei"</span>);     <span class="comment">//更新字体状态</span></span><br><span class="line">glPrint(<span class="string">"橡皮条程序"</span>);</span><br><span class="line">glRasterPos2d(<span class="number">-0.35</span>, <span class="number">0.1</span>);                          <span class="comment">//玄学调参</span></span><br><span class="line">glPrint(<span class="string">"右键设置属性"</span>);</span><br><span class="line">glRasterPos2d(<span class="number">-0.52</span>, <span class="number">-0.1</span>);</span><br><span class="line">glPrint(<span class="string">"全局按空格开始画线"</span>);</span><br><span class="line">glRasterPos2d(<span class="number">-0.52</span>, <span class="number">-0.3</span>);</span><br><span class="line">glPrint(<span class="string">"全局按回车返回本屏"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><br><br></p>
+<h4 id="2-添加了三个菜单：颜色，线宽，线形"><a href="#2-添加了三个菜单：颜色，线宽，线形" class="headerlink" title="2.  添加了三个菜单：颜色，线宽，线形"></a>2.  添加了三个菜单：颜色，线宽，线形</h4><p>菜单功能：<br><strong>Color</strong>：通过点选屏幕上的<strong>颜色三角形</strong>来选定线的<strong>颜色</strong>，并有一个小方块可以<strong>实时预览颜色</strong>。<br><strong>Size</strong>：通过上下方向键调整线的<strong>宽度</strong>。<br><strong>Type</strong>：通过上下方向键调整线的<strong>形状</strong>（实线、点划线、虚线等），左右方向键调整线的密集程度。<br><br><br></p>
+<h5 id="Color部分的关键代码："><a href="#Color部分的关键代码：" class="headerlink" title="Color部分的关键代码："></a>Color部分的关键代码：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">changeColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//画出颜色三角形</span></span><br><span class="line">    GLdouble cR = <span class="number">1.0</span>;</span><br><span class="line">    glBegin(GL_POLYGON);</span><br><span class="line">    glColor3d(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">-0.8660254038</span> * cR, <span class="number">-0.75</span> * cR, <span class="number">0.0</span>);</span><br><span class="line">    glColor3d(<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.8660254038</span> * cR, <span class="number">-0.75</span> * cR, <span class="number">0.0</span>);</span><br><span class="line">    glColor3d(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0</span>, <span class="number">0.75</span> * cR, <span class="number">0.0</span>);</span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取鼠标所指处的颜色作为预览颜色</span></span><br><span class="line">    glReadPixels(x_now, win_height - y_now, <span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">        GL_RGB, GL_UNSIGNED_BYTE, colorBufferp);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//画出颜色预览矩形</span></span><br><span class="line">    glBegin(GL_POLYGON);</span><br><span class="line">    glColor3ubv(colorBufferp);</span><br><span class="line">    glVertex3d(<span class="number">0.7</span>, <span class="number">0.7</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.6</span>, <span class="number">0.7</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.6</span>, <span class="number">0.6</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.7</span>, <span class="number">0.6</span>, <span class="number">0.0</span>);</span><br><span class="line">    glEnd();</span><br><span class="line"></span><br><span class="line">    glFlush();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取点击的点的颜色作为实际画线的颜色</span></span><br><span class="line">    glReadPixels(x_color, win_height - y_color, <span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">        GL_RGB, GL_UNSIGNED_BYTE, penColorp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中x_now, y_now是从mouseFunc返回的实时鼠标坐标，指针<code>colorBufferp</code>指向当前鼠标所指部分的颜色，<code>penColorp</code>指向线的颜色。</p>
+<p>效果演示（GIF颜色有所差别，实际颜色平滑过渡）：<br><img src="/2019/04/22/OpenGL学习-3/2.gif" alt="Color演示"></p>
+<h5 id="Size部分的关键代码："><a href="#Size部分的关键代码：" class="headerlink" title="Size部分的关键代码："></a>Size部分的关键代码：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">changeSize</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">    <span class="comment">//载入penWitdh的初值</span></span><br><span class="line">    glLineWidth(penWidth);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//检测颜色是否被选择过，缺省为红色</span></span><br><span class="line">    x_color ? glColor3ubv(penColorp) :</span><br><span class="line">        glColor3d(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//画一条线以作预览</span></span><br><span class="line">    glBegin(GL_LINES);</span><br><span class="line">    glVertex3d(<span class="number">-0.8</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.8</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glEnd();</span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在specialFunc中设置了方向键的作用：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (key) &#123;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_UP:</span><br><span class="line">        <span class="keyword">if</span> (penWidth &lt; <span class="number">10</span>)penWidth += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_DOWN:</span><br><span class="line">        <span class="keyword">if</span> (penWidth &gt; <span class="number">1</span>) penWidth -= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果演示：<br><img src="/2019/04/22/OpenGL学习-3/3.gif" alt="Size演示"></p>
+<h5 id="Type部分的关键代码："><a href="#Type部分的关键代码：" class="headerlink" title="Type部分的关键代码："></a>Type部分的关键代码：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局变量</span></span><br><span class="line">GLint lineType[<span class="number">8</span>] = &#123;</span><br><span class="line">    <span class="number">1</span>,                      <span class="comment">//线形编号</span></span><br><span class="line">    <span class="number">4</span>,                      <span class="comment">//线形重复次数</span></span><br><span class="line">    <span class="number">0b1111111111111111</span> ,    <span class="comment">//几种默认的线形</span></span><br><span class="line">    <span class="number">0b0010011111111111</span> ,</span><br><span class="line">    <span class="number">0b1010101010101010</span> ,</span><br><span class="line">    <span class="number">0b0111100001111000</span> ,</span><br><span class="line">    <span class="number">0b0100010001000100</span> ,</span><br><span class="line">    <span class="number">0b0010011100100111</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">changeType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//设置线形</span></span><br><span class="line">    glLineStipple(<span class="number">1.0</span> * lineType[<span class="number">1</span>], lineType[lineType[<span class="number">0</span>] % LINETYPE + <span class="number">1</span>]);</span><br><span class="line">    x_color ? glColor3ubv(penColorp) : glColor3d(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//画一条预览线</span></span><br><span class="line">    glBegin(GL_LINES);</span><br><span class="line">    glVertex3d(<span class="number">-0.8</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glVertex3d(<span class="number">0.8</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glEnd();</span><br><span class="line">    glFlush();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样地，在specialFunc中也设置了相关的功能：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (key) &#123;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_UP:</span><br><span class="line">        lineType[<span class="number">0</span>]++;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_DOWN:     <span class="comment">//防止越界</span></span><br><span class="line">        lineType[<span class="number">0</span>] ? lineType[<span class="number">0</span>]-- : lineType[<span class="number">0</span>] = LINETYPE + <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_LEFT:</span><br><span class="line">        <span class="keyword">if</span> (lineType[<span class="number">1</span>]) lineType[<span class="number">1</span>]--;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GLUT_KEY_RIGHT:</span><br><span class="line">        <span class="keyword">if</span> (lineType[<span class="number">1</span>] &lt; <span class="number">128</span>) lineType[<span class="number">1</span>]++;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在初始化时必须设置<code>glEnable(GL_LINE_STIPPLE)</code>才能改变线形。</p>
+<p>效果演示：<br><img src="/2019/04/22/OpenGL学习-3/4.gif" alt="Type演示"></p>
+<h4 id="3-橡皮条的实现"><a href="#3-橡皮条的实现" class="headerlink" title="3.橡皮条的实现"></a>3.橡皮条的实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一些全局变量</span></span><br><span class="line">GLdouble linePos[<span class="number">100</span>][<span class="number">4</span>];   <span class="comment">//数组存储(x1,y1,x2,y2)四元组，最多存100条线</span></span><br><span class="line">GLint clickCnt = <span class="number">0</span>;         <span class="comment">//鼠标点击的次数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//把屏幕像素坐标映射到openGL的内部坐标，并把结果储存在全局变量x_adpt,y_adpt中</span></span><br><span class="line"><span class="comment">//因为没有考虑要复用这个函数，所以把存储的变量名直接写进去了，更合理的方式应该以指针为参数。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CoorAdapt</span><span class="params">(GLint x, GLint y)</span> </span>&#123;</span><br><span class="line">    x_adpt = (<span class="number">2.0</span> * x / win_width - <span class="number">1.0</span>) * (<span class="number">1.0</span> * win_width / win_height);</span><br><span class="line">    y_adpt = <span class="number">2.0</span> * (win_height - <span class="number">1.0</span> * y) / win_height - <span class="number">1.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在鼠标回调函数内部</span></span><br><span class="line"><span class="comment">//当画橡皮条时，存储线的始末位置到相应的linePos数组位置</span></span><br><span class="line">CoorAdapt(x, y);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!clickCnt) &#123;</span><br><span class="line">    linePos[<span class="number">0</span>][<span class="number">0</span>] = x_adpt;</span><br><span class="line">    linePos[<span class="number">0</span>][<span class="number">1</span>] = y_adpt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (clickCnt % <span class="number">2</span>) &#123;</span><br><span class="line">    linePos[(clickCnt - <span class="number">1</span>) / <span class="number">2</span>][<span class="number">2</span>] = x_adpt;</span><br><span class="line">    linePos[(clickCnt - <span class="number">1</span>) / <span class="number">2</span>][<span class="number">3</span>] = y_adpt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    linePos[clickCnt / <span class="number">2</span>][<span class="number">0</span>] = x_adpt;</span><br><span class="line">    linePos[clickCnt / <span class="number">2</span>][<span class="number">1</span>] = y_adpt;</span><br><span class="line">&#125;</span><br><span class="line">clickCnt++;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">drawScence</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    x_color ? glColor3ubv(penColorp) : glColor3d(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    CoorAdapt(x_now, y_now);        <span class="comment">//坐标转换</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (clickCnt) &#123;</span><br><span class="line">        <span class="keyword">if</span> (clickCnt % <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="comment">//点击了奇数次时，有若干条线已经画完，新线起点已定，终点时刻跟随鼠标</span></span><br><span class="line">            glBegin(GL_LINES);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (clickCnt - <span class="number">1</span>) / <span class="number">2</span>; i++) &#123;</span><br><span class="line">                glVertex3d(linePos[i][<span class="number">0</span>], linePos[i][<span class="number">1</span>], <span class="number">0.0</span>);</span><br><span class="line">                glVertex3d(linePos[i][<span class="number">2</span>], linePos[i][<span class="number">3</span>], <span class="number">0.0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            glVertex3d(linePos[(clickCnt - <span class="number">1</span>) / <span class="number">2</span>][<span class="number">0</span>],</span><br><span class="line">                linePos[(clickCnt - <span class="number">1</span>) / <span class="number">2</span>][<span class="number">1</span>], <span class="number">0.0</span>);       <span class="comment">//新线的起点</span></span><br><span class="line">            glVertex3d(x_adpt, y_adpt, <span class="number">0.0</span>);                <span class="comment">//终点跟随鼠标</span></span><br><span class="line">            glEnd();</span><br><span class="line">            glFlush();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//偶数次计数，只需要画出存储的若干对</span></span><br><span class="line">            glBegin(GL_LINES);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; clickCnt / <span class="number">2</span>; i++) &#123;</span><br><span class="line">                glVertex3d(linePos[i][<span class="number">0</span>], linePos[i][<span class="number">1</span>], <span class="number">0.0</span>);</span><br><span class="line">                glVertex3d(linePos[i][<span class="number">2</span>], linePos[i][<span class="number">3</span>], <span class="number">0.0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            glEnd();</span><br><span class="line">            glFlush();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个地方写了很久，原因是初始化时画线遵循的规律（第一个点没有给出）与后来的规律（前一个点已经给出）不同，同时点击的奇偶次数不同也会有不同的处理方式，多次修复BUG之后终于成功实现了这个功能。</p>
+<p>另外，考虑到要与前述设置属性的功能相协调，并出于优化流程的目的，我引入了<strong>显示模式</strong>的控制变量。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> displayMode &#123; C_BEGIN, C_COLOR, C_SIZE, C_TYPE, C_DRAW &#125;;    <span class="comment">//显示模式的id序列</span></span><br><span class="line">GLint DISPLAY_MODE = C_BEGIN;                                     <span class="comment">//初始化</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//显示回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (DISPLAY_MODE) &#123;</span><br><span class="line">    <span class="keyword">case</span> C_COLOR:</span><br><span class="line">        changeColor();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> C_SIZE:</span><br><span class="line">        changeSize();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> C_TYPE:</span><br><span class="line">        changeType();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> C_DRAW:</span><br><span class="line">        drawScence();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        defaultDisplay();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    glutPostRedisplay();</span><br><span class="line">    glutSwapBuffers();</span><br><span class="line">&#125;</span><br><span class="line">```。</span><br><span class="line">```C</span><br><span class="line"><span class="comment">//键盘回调</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">keybroad</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> key, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">27</span>:                                        <span class="comment">//ESC</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">13</span>:                                        <span class="comment">//回车返回主屏</span></span><br><span class="line">        DISPLAY_MODE = C_BEGIN;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">32</span>:                                        <span class="comment">//空格开始画线</span></span><br><span class="line">        DISPLAY_MODE = C_DRAW;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'c'</span>:</span><br><span class="line">        <span class="keyword">if</span> (DISPLAY_MODE == C_DRAW)</span><br><span class="line">            clickCnt = <span class="number">0</span>;                            <span class="comment">//画线时按c清屏(但是没有删除数据，只会重新写入)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自此程序主体完成，经过一番调试之后，整体使用效果如下（线没消掉的BUG是GIF解码的问题）：</p>
+<p><img src="/2019/04/22/OpenGL学习-3/5.gif" alt="整体使用"></p>
+<h2 id="Task2"><a href="#Task2" class="headerlink" title="Task2"></a>Task2</h2><h3 id="任务目标：-1"><a href="#任务目标：-1" class="headerlink" title="任务目标："></a>任务目标：</h3><ol>
+<li>添加菜单，允许选择画点、画线、或者画多边形着色。（未完成）</li>
+<li>设置鼠标左键、中键、右键回调函数，使其分别实现对模型进行旋转、平移和缩放。（部分完成）</li>
+<li>试着看看能不能设置光照（自学教材、红宝书相关章节）。<strong>（已完成）</strong></li>
+</ol>
+<p>由于时间关系，Task2的完成度没有Task1那么高 <del>，不过前两条我真的会做</del>，所以只是实现了写入ply文件并画出合适的效果，添加了轨迹球（轨迹球基本是各处扒下来的）。</p>
+<p>先贴出读取文件信息相关的代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">readInfo</span><span class="params">(<span class="keyword">int</span>* info, <span class="keyword">const</span> <span class="keyword">char</span>* file_adress)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="keyword">auto</span> MAX_CHAR = <span class="number">255</span>;        <span class="comment">//每行最多字符数</span></span><br><span class="line">    <span class="keyword">char</span> buf[MAX_CHAR];                   <span class="comment">//每行读取出的缓存</span></span><br><span class="line">    FILE* fp;</span><br><span class="line">    <span class="keyword">int</span> lines = <span class="number">0</span>;                        <span class="comment">//到end_header一共几行</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fopen_s(&amp;fp, file_adress, <span class="string">"r+"</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;                        <span class="comment">//打开失败</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (fgets(buf, MAX_CHAR, fp) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            lines++;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(buf, <span class="string">"end_header\n"</span>)) &#123;</span><br><span class="line">                <span class="comment">//获取头部结束位置</span></span><br><span class="line">                info[<span class="number">2</span>] = lines;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">strncmp</span>(buf, <span class="string">"element vertex "</span>, <span class="number">15</span>)) &#123;</span><br><span class="line">                <span class="comment">//获取element vertex 后面的数字</span></span><br><span class="line">                <span class="keyword">char</span>* tmp = buf;</span><br><span class="line">                <span class="keyword">while</span> (<span class="built_in">strchr</span>(tmp, <span class="string">' '</span>) != <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    tmp = <span class="built_in">strchr</span>(tmp, <span class="string">' '</span>) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                info[<span class="number">0</span>] = atoi(tmp);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="built_in">strncmp</span>(buf, <span class="string">"element face "</span>, <span class="number">13</span>)) &#123;</span><br><span class="line">                <span class="comment">//获取element face 后面的数字</span></span><br><span class="line">                <span class="keyword">char</span>* tmp = buf;</span><br><span class="line">                <span class="keyword">while</span> (<span class="built_in">strchr</span>(tmp, <span class="string">' '</span>) != <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    tmp = <span class="built_in">strchr</span>(tmp, <span class="string">' '</span>) + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                info[<span class="number">1</span>] = atoi(tmp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fclose(fp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">readData</span><span class="params">(VertexData* vd, FaceData* fd, <span class="keyword">int</span>* info, <span class="keyword">const</span> <span class="keyword">char</span>* file_adress)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="keyword">auto</span> MAXLINE = <span class="number">255</span>;</span><br><span class="line">    FILE* fp;</span><br><span class="line">    <span class="keyword">char</span> buf[MAXLINE];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> line = <span class="number">0</span>;                        <span class="comment">//行数计数器</span></span><br><span class="line">    <span class="keyword">int</span> vertex = info[<span class="number">0</span>];                <span class="comment">//一共多少顶点</span></span><br><span class="line">    <span class="keyword">int</span> face = info[<span class="number">1</span>];                  <span class="comment">//一共多少面</span></span><br><span class="line">    <span class="keyword">int</span> header = info[<span class="number">2</span>];                <span class="comment">//头部长度</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fopen_s(&amp;fp, file_adress, <span class="string">"r+"</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fp != <span class="literal">NULL</span>) &#123;                    <span class="comment">//读取数据</span></span><br><span class="line">        <span class="keyword">while</span> (fgets(buf, MAXLINE, fp) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            line++;</span><br><span class="line">            <span class="keyword">if</span> (line &gt; header &amp;&amp; line &lt;= header + vertex) &#123;</span><br><span class="line">                <span class="comment">//读取顶点坐标和法向</span></span><br><span class="line">                <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">char</span>* token = <span class="literal">NULL</span>;</span><br><span class="line">                <span class="keyword">char</span>* next_token = <span class="literal">NULL</span>;</span><br><span class="line">                token = strtok_s(buf, <span class="string">" "</span>, &amp;next_token);</span><br><span class="line">                <span class="keyword">while</span> (t &lt; <span class="number">6</span> &amp;&amp; token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (t &lt; <span class="number">3</span> &amp;&amp; token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                        vd[line - header - <span class="number">1</span>].pos[t] = (<span class="keyword">float</span>)atof(token);</span><br><span class="line">                        token = strtok_s(<span class="literal">NULL</span>, <span class="string">" "</span>, &amp;next_token);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (t &gt;= <span class="number">3</span> &amp;&amp; token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                        vd[line - header - <span class="number">1</span>].nor[t - <span class="number">3</span>] = (<span class="keyword">float</span>)atof(token);</span><br><span class="line">                        token = strtok_s(<span class="literal">NULL</span>, <span class="string">" "</span>, &amp;next_token);</span><br><span class="line">                    &#125;</span><br><span class="line">                    t++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (line &gt; header + vertex) &#123;</span><br><span class="line">                <span class="comment">//读取面对应的点</span></span><br><span class="line">                <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">char</span>* token = <span class="literal">NULL</span>;</span><br><span class="line">                <span class="keyword">char</span>* next_token = <span class="literal">NULL</span>;</span><br><span class="line">                token = strtok_s(buf, <span class="string">" "</span>, &amp;next_token);</span><br><span class="line">                <span class="keyword">while</span> (t &lt; <span class="number">4</span> &amp;&amp; token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (token != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                        fd[line - vertex - header - <span class="number">1</span>].index[t] = atoi(token);</span><br><span class="line">                        token = strtok_s(<span class="literal">NULL</span>, <span class="string">" "</span>, &amp;next_token);</span><br><span class="line">                    &#125;</span><br><span class="line">                    t++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fclose(fp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之前没接触过文件读写的处理。我先扫了一眼我们C语言的教材，然后在VS上敲了敲书上的代码，结果全是error和warning，一看错误提示才知道VS已经不支持很多像<code>fopen</code> <code>strtok</code>这种的不太安全的函数而改用<code>fopen_s</code> <code>strtok_s</code>了。这些函数的参数列表也有变化，所以我研究了好久之后才终于写出了这两个函数。</p>
+<p>有了读取的函数，接下来就是怎么读了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">float</span> pos[<span class="number">3</span>];                        <span class="comment">//点的位置</span></span><br><span class="line">    <span class="keyword">float</span> nor[<span class="number">3</span>];</span><br><span class="line">&#125;VertexData;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> index[<span class="number">4</span>];                        <span class="comment">//面的顶点信息</span></span><br><span class="line">&#125;FaceData;</span><br><span class="line"></span><br><span class="line">GLint ModelInfo[<span class="number">3</span>] = &#123; <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span> &#125;;          <span class="comment">//模型的顶点数，面片数，ply文件中end_header对应的行数</span></span><br><span class="line">VertexData* vData;                       <span class="comment">//顶点数据</span></span><br><span class="line">FaceData*   fData;                       <span class="comment">//面数据</span></span><br></pre></td></tr></table></figure></p>
+<p>采用了一个数组存储模型的总体信息，两个数组用于存放顶点，法向和面对应的点序号：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//init函数中的相关部分</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* model_adress = <span class="string">"lizhenxiout-repaired.ply"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (readInfo(ModelInfo, model_adress) == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">"Cann't read Information"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//分配内存</span></span><br><span class="line">    vData = (VertexData*)<span class="built_in">malloc</span>(<span class="number">6</span> * ModelInfo[<span class="number">0</span>] * <span class="keyword">sizeof</span>(<span class="keyword">float</span>));</span><br><span class="line">    fData = (FaceData*)<span class="built_in">malloc</span>(<span class="number">4</span> * ModelInfo[<span class="number">1</span>] * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (readData(vData, fData, ModelInfo, model_adress) == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">"Cann't read data"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main内部的处理</span></span><br><span class="line"><span class="keyword">if</span> (init() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">char</span> pause = getchar();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Model data:\nvertices = %d\nfaces = %d\n"</span></span><br><span class="line">    <span class="string">"Read successfully.\n"</span>, ModelInfo[<span class="number">0</span>], ModelInfo[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+<p>这样数据就可以读取进两个数组，接下来只要对应地画出来就行了，比较简单：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">drawModel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">sizeof</span>(*vData) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        glBegin(GL_TRIANGLES);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ModelInfo[<span class="number">1</span>]; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">3</span>; j++) &#123;</span><br><span class="line">                glNormal3d(</span><br><span class="line">                    vData[fData[i].index[j]].nor[<span class="number">0</span>],</span><br><span class="line">                    vData[fData[i].index[j]].nor[<span class="number">1</span>],</span><br><span class="line">                    vData[fData[i].index[j]].nor[<span class="number">2</span>]);</span><br><span class="line">                glVertex3d(</span><br><span class="line">                    vData[fData[i].index[j]].pos[<span class="number">0</span>] / <span class="number">500</span>,</span><br><span class="line">                    vData[fData[i].index[j]].pos[<span class="number">1</span>] / <span class="number">500</span>,</span><br><span class="line">                    vData[fData[i].index[j]].pos[<span class="number">2</span>] / <span class="number">500</span>);</span><br><span class="line">                    <span class="comment">//除以500相当于标准化到[-2,2]区间里</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        glEnd();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后添加一点简单的光源：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lightDisplay</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//材质反光性设置</span></span><br><span class="line">    GLfloat mat_specular[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;            <span class="comment">//镜面反射参数</span></span><br><span class="line">    GLfloat mat_shininess[] = &#123; <span class="number">120.0</span> &#125;;                        <span class="comment">//高光指数</span></span><br><span class="line">    GLfloat light_position[] = &#123; <span class="number">-1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;         <span class="comment">//最后1是开关</span></span><br><span class="line">    GLfloat white_light[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;</span><br><span class="line">    GLfloat Light_Model_Ambient[] = &#123; <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span> &#125;;     <span class="comment">//环境光参数</span></span><br><span class="line"></span><br><span class="line">    glClearColor(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">    glShadeModel(GL_SMOOTH);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//材质属性</span></span><br><span class="line">    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);</span><br><span class="line">    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//灯光设置</span></span><br><span class="line">    glLightfv(GL_LIGHT0, GL_POSITION, light_position);</span><br><span class="line">    glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);               <span class="comment">//散射光属性</span></span><br><span class="line">    glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);              <span class="comment">//镜面反射光</span></span><br><span class="line">    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, Light_Model_Ambient); <span class="comment">//环境光参数</span></span><br><span class="line"></span><br><span class="line">    glEnable(GL_LIGHTING);</span><br><span class="line">    glEnable(GL_LIGHT0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再加了个<code>glutFullScreen()</code>全屏。</p>
+<p>效果如下：<br><img src="/2019/04/22/OpenGL学习-3/6.png" alt="效果"></p>
+<p>然后从网上扒了个轨迹球的功能，又调了调模型的位置和大小 <del>（所以我会用平移旋转缩放）</del>，之后变成了这样：</p>
+<p><img src="/2019/04/22/OpenGL学习-3/7.gif" alt="轨迹球"></p>
+<p>由于时间原因就先完成到这里了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/09/OpenGL学习-2/" rel="next" title="OpenGL学习(2)">
+                <i class="fa fa-chevron-left"></i> OpenGL学习(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/05/OpenGL学习-4/" rel="prev" title="OpenGL学习(4)">
+                OpenGL学习(4) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80Mjk1MC8xOTQ5Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Pyreymo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pyreymo" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:pyreymo@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+		  
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenGL第四次实验"><span class="nav-number">1.</span> <span class="nav-text">OpenGL第四次实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task1"><span class="nav-number">1.2.</span> <span class="nav-text">Task1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务目标："><span class="nav-number">1.2.1.</span> <span class="nav-text">任务目标：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-添加了绘制文字功能"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1. 添加了绘制文字功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-添加了三个菜单：颜色，线宽，线形"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">2.  添加了三个菜单：颜色，线宽，线形</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Color部分的关键代码："><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">Color部分的关键代码：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Size部分的关键代码："><span class="nav-number">1.2.1.2.2.</span> <span class="nav-text">Size部分的关键代码：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Type部分的关键代码："><span class="nav-number">1.2.1.2.3.</span> <span class="nav-text">Type部分的关键代码：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-橡皮条的实现"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">3.橡皮条的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task2"><span class="nav-number">1.3.</span> <span class="nav-text">Task2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务目标：-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">任务目标：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pyreymo</span>
+
+  
+</div>
+
+
+  <div class="powered-by">powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
